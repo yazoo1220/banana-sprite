@@ -1,0 +1,5 @@
+{
+  "name": "Banana Sprite Generator",
+  "description": "Generate 16-frame (4x4) pixel art sprite sheets from a reference image using Nano Banana Pro. Features consistent character retention, white background, 1:1 aspect ratio, and GIF export.",
+  "requestFramePermissions": []
+}
