@@ -31,7 +31,11 @@ function App() {
             }, 500);
           }
         } else {
-             if(process.env.API_KEY) {
+             // Check localStorage first
+             const storedKey = localStorage.getItem('banana_sprite_api_key');
+             if (storedKey) {
+                 setApiKey(storedKey);
+             } else if(process.env.API_KEY) {
                  setApiKey(process.env.API_KEY);
              }
         }
@@ -48,6 +52,13 @@ function App() {
             await window.aistudio.openSelectKey();
             setApiKey(process.env.API_KEY || '');
              // window.location.reload(); // Reload isn't strictly necessary if state updates, but good for clean slate
+        } else {
+            // Manual input for non-AI Studio environments
+            const key = window.prompt(language === 'ja' ? "Gemini APIキーを入力してください" : "Please enter your Gemini API Key", apiKey);
+            if (key) {
+                setApiKey(key);
+                localStorage.setItem('banana_sprite_api_key', key);
+            }
         }
     } catch(e) {
         console.error("Failed to open key selector", e);
